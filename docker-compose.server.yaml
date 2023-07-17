@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  tg_spy:
+    container_name: tg_spy
+    restart: unless-stopped
+    image: registry.digitalocean.com/chua/tg_spy:latest
+    ports:
+      - 9889:3000
+    volumes:
+      - .config:/app/.config
