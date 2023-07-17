@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  tg_spy:
+    container_name: tg_spy
+    restart: unless-stopped
+    image: tg_spy
+    build:
+      context: .
+      target: production
+      dockerfile: ./Dockerfile
+    command: npm run start:prod
+    ports:
+      - 3000:3000
+      #- 9229:9229
+      #    networks:
+      #      - nesjs-network
+      #    volumes:
+      #      - .:/app
+      #      - /app/node_modules
+
+networks:
+  nesjs-network:

@@ -108,7 +108,14 @@ export class TelegramService {
   }
 
   loadConfig(): void {
-    this.config = JSON.parse(readFileSync(this._configKey, 'utf8') || '{}');
+    let dataString = JSON.stringify(this.config);
+    try {
+      dataString = readFileSync(this._configKey, 'utf8') || '{}';
+    } catch (error) {
+      this._logger.error(error);
+      this._logger.warn('Running with empty config');
+    }
+    this.config = JSON.parse(dataString);
     this._logger.log('Loaded config');
   }
 
