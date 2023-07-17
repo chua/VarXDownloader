@@ -55,6 +55,11 @@ export class TelegramService {
 
     const user = await this.getMe();
     this._logger.log(`Usuario: ${user['username'] || '!! No user'}`);
+    this._logger.log('Getting Channels');
+    await this.getChats();
+    this._logger.log('listening chats...');
+    // without await... separate thread
+    this.processMessages();
   }
 
   isConnected(): boolean {
@@ -131,7 +136,8 @@ export class TelegramService {
         // eslint-disable-next-line prettier/prettier
         const grpNumber = `-100${update.message.peerId['channelId'].value.toString()}`;
         const grupo = this._channels.find((c) => c.id === grpNumber);
-        if (grupo.follow && grupo.destId) {
+        //console.log(grpNumber, grupo);
+        if (grupo !== undefined && grupo.follow && grupo.destId) {
           this._logger.log(grupo.name, '-->', grpNumber);
           this._client.forwardMessages(grupo.destId, {
             fromPeer: update.message.peerId,

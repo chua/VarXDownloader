@@ -4,7 +4,7 @@ services:
   tg_spy:
     container_name: tg_spy
     restart: unless-stopped
-    image: registry.digitalocean.com/chua/tg_spy:latest
+    image: registry.digitalocean.com/chua/tg_spy:1.0.7
     ports:
       - 9889:3000
     volumes:
