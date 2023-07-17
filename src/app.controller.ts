@@ -1,12 +1,21 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { TelegramService } from './telegram/telegram.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly tgService: TelegramService) { }
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @Get('chats')
+  async getChats() {
+    const channels = await this.tgService.getChats();
+    return {
+      data: channels,
+      ok: true,
+    };
+  }
+
+  @Get('proccessMessages')
+  async proccessMessages() {
+    this.tgService.processMessages();
   }
 }
