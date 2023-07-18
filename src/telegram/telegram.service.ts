@@ -13,7 +13,7 @@ export class TelegramService {
   private _client: TelegramClient;
   private _isSessionActive = false;
   private _channels: ITgChannel[] = [];
-  private _channelsToCopy = ['-1001519159775' /*, '-1001639389789'*/];
+  private _channelsToCopy = ['-1001519159775', '-1001639389789'];
   private _configKey = '.config';
   public config: AppConfig = {
     stringSession: '',
@@ -136,7 +136,7 @@ export class TelegramService {
         // eslint-disable-next-line prettier/prettier
         const grpNumber = `-100${update.message.peerId['channelId'].value.toString()}`;
         const grupo = this._channels.find((c) => c.id === grpNumber);
-        //console.log(grpNumber, grupo);
+        // console.log(grpNumber, '===', grupo);
         if (grupo !== undefined && grupo.follow && grupo.destId) {
           this._logger.log(grupo.name, '-->', grpNumber);
           this._client.forwardMessages(grupo.destId, {
