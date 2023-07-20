@@ -13,7 +13,7 @@ export class TelegramService {
   private _client: TelegramClient;
   private _isSessionActive = false;
   private _channels: ITgChannel[] = [];
-  private _channelsToCopy = ['-1001519159775', '-1001639389789'];
+  private _channelsToCopy = [...];
   private _configKey = '.config';
   public config: AppConfig = {
     stringSession: '',
@@ -102,8 +102,7 @@ export class TelegramService {
   }
 
   getTwin(number: string): string {
-    if (number === '-1001639389789') return '-823899362'; // adofor social
-    if (number === '-1001519159775') return '-831559400'; // adofor
+    //retrun a valid chanell or down
     return null;
   }
 

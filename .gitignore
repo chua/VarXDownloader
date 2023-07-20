@@ -3,6 +3,8 @@ README.md
 
 # config Files
 .skey
+.config
+.skey.bak
 
 # compiled output
 /dist
